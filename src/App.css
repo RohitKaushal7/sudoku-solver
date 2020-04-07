@@ -113,3 +113,21 @@ h2{
         transform: translate(0,0);
     }
 }
+
+@media (max-width:500px){
+    main{
+        background: #fff;
+    }
+    body{
+        background: #fff !important;
+    }
+   .sudo{
+       max-width: 350px;
+   }
+   .info{
+       max-height: none;
+   }
+   .flex-center{
+       font-size:11px ;
+    }
+}
