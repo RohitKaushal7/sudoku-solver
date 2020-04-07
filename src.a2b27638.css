@@ -219,6 +219,21 @@ h2{
         transform: translate(0,0);
     }
 }
+
+@media (max-width:500px){
+    main{
+        background: #fff;
+    }
+   .sudo{
+       max-width: 350px;
+   }
+   .info{
+       max-height: none;
+   }
+   .flex-center{
+       font-size:11px ;
+    }
+}
 /* PrismJS 1.20.0
 https://prismjs.com/download.html#themes=prism&languages=python */
 /**
