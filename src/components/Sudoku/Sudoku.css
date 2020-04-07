@@ -1,0 +1,76 @@
+.sudoku{
+    position: relative;
+    z-index: 2;
+}
+
+.col{
+    width: 3em;
+    height: 3em;
+    overflow: hidden;
+    /* box-shadow: 0 0 5px #0003; */
+    border: 1px solid #eee;
+    display: inline-block;
+    margin: 0em;
+    background: #fff;
+}
+
+
+.col:nth-child(3n):not(:last-child){
+    /* border-right: 2px solid black; */
+    margin-right: 0.2em;
+}
+
+.row:nth-child(3n):not(:last-child){
+    /* border-bottom: 2px solid black; */
+    margin-bottom: 0.2em;
+}
+
+
+.row{
+    height: 3em;
+}
+
+.grid{
+    background: #ddd;
+    box-shadow: 0 2px 12px #0003;
+}
+
+.solve{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+button , .fast , .slow{
+    display: inline-block;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    transition: all 0.1s;
+    background: #999;
+    color: #fff;
+    outline: none;
+    width: 100%;
+}
+.fast:hover, .fast:active{
+    background: #000000;
+    color: #fff;
+    box-shadow: 0 2px 5px #0003;
+}
+
+.slow:hover, .slow:active{
+    background: #372646;
+    color: #fff;
+    box-shadow: 0 2px 5px #0003;
+}
+
+.clear{
+    width: fit-content;
+}
+
+.single{
+    justify-self: flex-start;
+    background: #ddd;
+    color: #666;
+}
