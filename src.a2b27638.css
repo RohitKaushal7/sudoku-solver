@@ -37,7 +37,6 @@ input[type=number]::-webkit-outer-spin-button{
     width: 3em;
     height: 3em;
     overflow: hidden;
-    /* box-shadow: 0 0 5px #0003; */
     border: 1px solid #eee;
     display: inline-block;
     margin: 0em;
@@ -104,6 +103,8 @@ button , .fast , .slow{
     background: #ddd;
     color: #666;
 }
+
+
 main{
     display: flex;
     flex-direction: column;
@@ -137,7 +138,7 @@ h1{
 }
 .info{
     max-width: 500px;
-    max-height: 600px;
+    max-height: 550px;
     overflow-y: scroll;
     overflow-x: hidden;
     color: #555;
