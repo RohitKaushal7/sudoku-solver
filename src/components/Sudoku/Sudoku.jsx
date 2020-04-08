@@ -78,7 +78,7 @@ class Sudoku extends Component {
                     {grid.map((row, i) =>
                         <div key={i} className="row">
                             {row.map((cell, j) =>
-                                <div key={j} className="col"> {<InputBox val={cell != 0 ? cell : ""} onChange={(e) => this.props.onChange ? this.props.onChange(e, i, j) : this.changeNumber(e, i, j)} />}</div>)}
+                                <div key={j} className="col"> {<InputBox i={i} j={j} val={cell != 0 ? cell : ""} onChange={(e) => this.props.onChange ? this.props.onChange(e, i, j) : this.changeNumber(e, i, j)} />}</div>)}
                         </div>)}
                 </div>
                 <div className="solve">

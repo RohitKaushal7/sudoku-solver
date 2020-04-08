@@ -4,7 +4,9 @@ import "./App.css"
 import "./utils/prism"
 import "./utils/prism.css"
 import { solve, deepCopy, isSafe } from "./utils/utils"
+import anime from "animejs"
 
+const SLOW_DELAY = 1;
 export default class App extends Component {
   state = {
     grid: [
@@ -31,7 +33,14 @@ export default class App extends Component {
 
   componentDidMount() {
     this.setState({ question: deepCopy(this.state.grid) });
+    anime({
+      targets: ".flex-center .col",
+      scale: [0, 1],
+      opacity: [0, 1],
+      delay: anime.stagger(100, { start: 500, grid: [9, 9], from: "center" })
+    })
   }
+
 
   isValid = (grid) => {
     for (let i = 0; i < 9; ++i) {
@@ -50,7 +59,12 @@ export default class App extends Component {
 
   changeNumber = (e, i, j) => {
     let newGrid = deepCopy(this.state.grid);
-    newGrid[i][j] = e.target.value;
+    newGrid[i][j] = e.target.value % 10;
+    anime({
+      targets: e.target,
+      scale: [0.5, 1],
+      duration: 400
+    })
 
     this.setState({ grid: newGrid });
   }
@@ -149,7 +163,7 @@ export default class App extends Component {
                 if (await new Promise((resolve, reject) => {
                   setTimeout(() => {
                     resolve(solveSlow(grid))
-                  }, 1)
+                  }, SLOW_DELAY)
                 })) {
                   return true;
                 }
@@ -203,7 +217,7 @@ export default class App extends Component {
 
     let solutions = null;
     if (this.state.solutions.length) {
-      solutions = this.state.solutions.map((sol, i) => <div className="solution"><Sudoku grid={sol} /></div>)
+      solutions = this.state.solutions.map((sol, i) => <div key={i} className="solution"><Sudoku grid={sol} /></div>)
     }
 
     return (<>
@@ -281,4 +295,3 @@ def solve(grid):
     </>)
   }
 };
-

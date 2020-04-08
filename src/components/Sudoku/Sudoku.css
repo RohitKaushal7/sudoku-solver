@@ -7,7 +7,6 @@
     width: 3em;
     height: 3em;
     overflow: hidden;
-    /* box-shadow: 0 0 5px #0003; */
     border: 1px solid #eee;
     display: inline-block;
     margin: 0em;
@@ -74,3 +73,4 @@ button , .fast , .slow{
     background: #ddd;
     color: #666;
 }
+
