@@ -224,6 +224,9 @@ h2{
     main{
         background: #fff;
     }
+    body{
+        background: #fff !important;
+    }
    .sudo{
        max-width: 350px;
    }
