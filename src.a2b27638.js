@@ -29561,9 +29561,9 @@ var Sudoku = /*#__PURE__*/function (_Component) {
       return _react.default.createElement("div", {
         className: "sudoku"
       }, this.props.solvable ? _react.default.createElement("button", {
-        className: "clear",
-        onClick: this.props.clear
-      }, "Clear") : null, _react.default.createElement("div", {
+        className: "new",
+        onClick: this.props.new
+      }, "New") : null, _react.default.createElement("div", {
         className: "grid"
       }, grid.map(function (row, i) {
         return _react.default.createElement("div", {
@@ -31846,6 +31846,87 @@ var App = /*#__PURE__*/function (_Component) {
       noSolution: false,
       moreThan5: false
     };
+    _this.generate = /*#__PURE__*/(0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+      var grid, i, j, _i, _j, found, num;
+
+      return _regenerator.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              grid = (0, _utils.deepCopy)(_this.state.grid); // let res = await fetch("http://www.cs.utep.edu/cheon/ws/sudoku/new/?size=9&level=3");
+              // res = await res.json();
+
+              for (i = 0; i < 9; ++i) {
+                for (j = 0; j < 9; ++j) {
+                  grid[i][j] = 0;
+                }
+              }
+
+              for (_i = 0; _i < 9; _i += 3) {
+                for (_j = 0; _j < 9; _j += 3) {
+                  found = false;
+
+                  while (!found) {
+                    num = parseInt(Math.random() * 9);
+
+                    if ((0, _utils.isSafe)(grid, _i, _j, num)) {
+                      grid[_i][_j + _i / 3] = num;
+                      found = true;
+                    }
+                  }
+                }
+              }
+
+              _this.setState({
+                grid: grid
+              }, /*#__PURE__*/(0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+                var _i2, _j2;
+
+                return _regenerator.default.wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        _context.next = 2;
+                        return _this.solveItFast();
+
+                      case 2:
+                        grid = (0, _utils.deepCopy)(_this.state.grid);
+
+                        for (_i2 = 0; _i2 < 9; ++_i2) {
+                          for (_j2 = 0; _j2 < 9; ++_j2) {
+                            if (Math.random() > 0.5) grid[_i2][_j2] = 0;
+                          }
+                        }
+
+                        (0, _animejs.default)({
+                          targets: ".flex-center .col",
+                          scale: [0, 1],
+                          opacity: [0, 1],
+                          delay: _animejs.default.stagger(100, {
+                            grid: [9, 9],
+                            from: "center"
+                          })
+                        });
+
+                        _this.setState({
+                          grid: grid
+                        });
+
+                      case 6:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee);
+              })));
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
 
     _this.isValid = function (grid) {
       for (var i = 0; i < 9; ++i) {
@@ -31995,17 +32076,17 @@ var App = /*#__PURE__*/function (_Component) {
       var solutions = [];
 
       var solveSlow = /*#__PURE__*/function () {
-        var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(grid) {
+        var _ref3 = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(grid) {
           var i, j, x, solution;
-          return _regenerator.default.wrap(function _callee$(_context) {
+          return _regenerator.default.wrap(function _callee3$(_context3) {
             while (1) {
-              switch (_context.prev = _context.next) {
+              switch (_context3.prev = _context3.next) {
                 case 0:
                   i = 0;
 
                 case 1:
                   if (!(i < 9)) {
-                    _context.next = 28;
+                    _context3.next = 28;
                     break;
                   }
 
@@ -32013,12 +32094,12 @@ var App = /*#__PURE__*/function (_Component) {
 
                 case 3:
                   if (!(j < 9)) {
-                    _context.next = 25;
+                    _context3.next = 25;
                     break;
                   }
 
                   if (!(grid[i][j] == 0)) {
-                    _context.next = 22;
+                    _context3.next = 22;
                     break;
                   }
 
@@ -32026,12 +32107,12 @@ var App = /*#__PURE__*/function (_Component) {
 
                 case 6:
                   if (!(x < 10)) {
-                    _context.next = 21;
+                    _context3.next = 21;
                     break;
                   }
 
                   if (!(0, _utils.isSafe)(grid, i, j, x)) {
-                    _context.next = 18;
+                    _context3.next = 18;
                     break;
                   }
 
@@ -32042,7 +32123,7 @@ var App = /*#__PURE__*/function (_Component) {
                     grid: grid
                   });
 
-                  _context.next = 13;
+                  _context3.next = 13;
                   return new Promise(function (resolve, reject) {
                     setTimeout(function () {
                       resolve(solveSlow(grid));
@@ -32050,12 +32131,12 @@ var App = /*#__PURE__*/function (_Component) {
                   });
 
                 case 13:
-                  if (!_context.sent) {
-                    _context.next = 15;
+                  if (!_context3.sent) {
+                    _context3.next = 15;
                     break;
                   }
 
-                  return _context.abrupt("return", true);
+                  return _context3.abrupt("return", true);
 
                 case 15:
                   wrong_guess++;
@@ -32067,20 +32148,20 @@ var App = /*#__PURE__*/function (_Component) {
 
                 case 18:
                   ++x;
-                  _context.next = 6;
+                  _context3.next = 6;
                   break;
 
                 case 21:
-                  return _context.abrupt("return", false);
+                  return _context3.abrupt("return", false);
 
                 case 22:
                   ++j;
-                  _context.next = 3;
+                  _context3.next = 3;
                   break;
 
                 case 25:
                   ++i;
-                  _context.next = 1;
+                  _context3.next = 1;
                   break;
 
                 case 28:
@@ -32096,7 +32177,7 @@ var App = /*#__PURE__*/function (_Component) {
                   solution = (0, _utils.deepCopy)(grid);
 
                   if (!(solutions.length > 5)) {
-                    _context.next = 35;
+                    _context3.next = 35;
                     break;
                   }
 
@@ -32106,7 +32187,7 @@ var App = /*#__PURE__*/function (_Component) {
                     moreThan5: true
                   });
 
-                  return _context.abrupt("return", true);
+                  return _context3.abrupt("return", true);
 
                 case 35:
                   solutions.push(solution);
@@ -32115,18 +32196,18 @@ var App = /*#__PURE__*/function (_Component) {
                     solutions: solutions
                   });
 
-                  return _context.abrupt("return", _this.state.oneSolution);
+                  return _context3.abrupt("return", _this.state.oneSolution);
 
                 case 38:
                 case "end":
-                  return _context.stop();
+                  return _context3.stop();
               }
             }
-          }, _callee);
+          }, _callee3);
         }));
 
         return function solveSlow(_x) {
-          return _ref.apply(this, arguments);
+          return _ref3.apply(this, arguments);
         };
       }();
 
@@ -32195,6 +32276,7 @@ var App = /*#__PURE__*/function (_Component) {
         grid: this.state.grid,
         solvable: true,
         clear: this.clear,
+        new: this.generate,
         singleToggle: function singleToggle() {
           return _this2.setState({
             oneSolution: !_this2.state.oneSolution
@@ -32269,7 +32351,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34689" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44031" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
