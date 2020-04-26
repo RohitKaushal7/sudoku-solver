@@ -73,7 +73,8 @@ class Sudoku extends Component {
         return (
 
             <div className="sudoku">
-                {this.props.solvable ? <button className="clear" onClick={this.props.clear}>Clear</button> : null}
+                {/* {this.props.solvable ? <button className="clear" onClick={this.props.clear}>Clear</button> : null} */}
+                {this.props.solvable ? <button className="new" onClick={this.props.new}>New</button> : null}
                 <div className="grid">
                     {grid.map((row, i) =>
                         <div key={i} className="row">

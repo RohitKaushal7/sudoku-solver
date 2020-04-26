@@ -41,6 +41,48 @@ export default class App extends Component {
     })
   }
 
+  generate = async () => {
+    this.setState({ oneSolution: true });
+    let grid = deepCopy(this.state.grid);
+    // let res = await fetch("http://www.cs.utep.edu/cheon/ws/sudoku/new/?size=9&level=3");
+    // res = await res.json();
+    for (let i = 0; i < 9; ++i) {
+      for (let j = 0; j < 9; ++j) {
+        grid[i][j] = 0;
+      }
+    }
+    for (let i = 0; i < 9; i += 3) {
+      for (let j = 0; j < 9; j += 3) {
+        let found = false;
+        while (!found) {
+          let num = parseInt(Math.random() * 9);
+          if (isSafe(grid, i, j + (i / 3), num)) {
+            grid[i][j + (i / 3)] = num;
+            found = true;
+          }
+        }
+      }
+    }
+
+    this.setState({ grid: grid }, async () => {
+      await this.solveItFast();
+      grid = deepCopy(this.state.grid);
+
+      for (let i = 0; i < 9; ++i) {
+        for (let j = 0; j < 9; ++j) {
+          if (Math.random() > 0.5) grid[i][j] = 0;
+        }
+      }
+      anime({
+        targets: ".flex-center .col",
+        scale: [0, 1],
+        opacity: [0, 1],
+        delay: anime.stagger(100, { grid: [9, 9], from: "center" })
+      })
+      this.setState({ grid: grid });
+
+    });
+  }
 
   isValid = (grid) => {
     for (let i = 0; i < 9; ++i) {
@@ -272,6 +314,7 @@ def solve(grid):
               grid={this.state.grid}
               solvable
               clear={this.clear}
+              new={this.generate}
               singleToggle={() => this.setState({ oneSolution: !this.state.oneSolution })}
               oneSolution={this.state.oneSolution}
               solveItSlow={this.solveItSlow}
