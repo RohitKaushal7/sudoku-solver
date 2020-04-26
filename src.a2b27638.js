@@ -31853,6 +31853,10 @@ var App = /*#__PURE__*/function (_Component) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              _this.setState({
+                oneSolution: true
+              });
+
               grid = (0, _utils.deepCopy)(_this.state.grid); // let res = await fetch("http://www.cs.utep.edu/cheon/ws/sudoku/new/?size=9&level=3");
               // res = await res.json();
 
@@ -31869,7 +31873,7 @@ var App = /*#__PURE__*/function (_Component) {
                   while (!found) {
                     num = parseInt(Math.random() * 9);
 
-                    if ((0, _utils.isSafe)(grid, _i, _j, num)) {
+                    if ((0, _utils.isSafe)(grid, _i, _j + _i / 3, num)) {
                       grid[_i][_j + _i / 3] = num;
                       found = true;
                     }
@@ -31920,7 +31924,7 @@ var App = /*#__PURE__*/function (_Component) {
                 }, _callee);
               })));
 
-            case 4:
+            case 5:
             case "end":
               return _context2.stop();
           }
@@ -32351,7 +32355,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44031" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33815" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
