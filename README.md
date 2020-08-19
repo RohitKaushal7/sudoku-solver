@@ -1,4 +1,9 @@
 # Sudoku Solver
+
+<div>
+    <img src="https://rohitkaushal7.github.io/images/sudoku-solver.png"/>
+</div>
+
 [![HitCount](http://hits.dwyl.com/RohitKaushal7/sudoku-solver.svg)](http://hits.dwyl.com/RohitKaushal7/sudoku-solver)
 
 Solves sudoku using recursion (Backtracking). shows recursion and backtracking in slow motion (1000fps). go get the solution for your sudoku.
